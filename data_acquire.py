@@ -12,18 +12,18 @@ import utils
 from database import upsert_bpa
 
 
-BPA_SOURCE = 'https://og-production-open-data-bostonma-892364687672.s3.amazonaws.com/resources/f123e65d-dc0e-4c83-9348-ed46fec498c0/tmpke4utrxy.csv?Signature=UAjyK0cDg%2BFiT22SGIeHlr12eQ8%3D&Expires=1575837619&AWSAccessKeyId=AKIAJJIENTAPKHZMIPXQ'
+City_SOURCE = 'https://data.boston.gov/dataset/1b894599-21ff-478f-937d-653954977951/resource/f123e65d-dc0e-4c83-9348-ed46fec498c0/download/tmpm6_yf0qo.csv'
+Libray_SOURCE = 'https://data.boston.gov/dataset/652762e9-2556-47cd-8e80-798546992a57/resource/87c759ee-63b9-4aec-a00b-bba1672a20ef/download/tmpx80zw3rn.csv'
 MAX_DOWNLOAD_ATTEMPT = 5
-DOWNLOAD_PERIOD = 10         # second
+DOWNLOAD_PERIOD = 14400         # second
 logger = logging.Logger(__name__)
 utils.setup_logger(logger, 'data.log')
 
 
-def download_bpa(url=BPA_SOURCE, retries=MAX_DOWNLOAD_ATTEMPT):
-    """Returns BPA text from `BPA_SOURCE` that includes power loads and resources
+def download_data(url, retries=MAX_DOWNLOAD_ATTEMPT):
+    """Returns data text from `data_SOURCE` that includes datetime and total power usage
     Returns None if network failed
     """
-    print('hi')
     text = None
     for i in range(retries):
         try:
@@ -33,14 +33,13 @@ def download_bpa(url=BPA_SOURCE, retries=MAX_DOWNLOAD_ATTEMPT):
         except requests.exceptions.HTTPError as e:
             logger.warning("Retry on HTTP Error: {}".format(e))
     if text is None:
-        logger.error('download_bpa too many FAILED attempts')
+        logger.error('download_data too many FAILED attempts')
     return text
 
 
-def filter_bpa(text):
+def filter_data(text):
     """Converts `text` to `DataFrame`, removes empty lines and descriptions
     """
-    print('hello')
     # use StringIO to convert string to a readable buffer
     df = pandas.read_csv(StringIO(text))
     
@@ -48,10 +47,12 @@ def filter_bpa(text):
 
 
 def update_once():
-    print('boop')
-    t = download_bpa()
-    df = filter_bpa(t)
-    upsert_bpa(df)
+    city = download_data(url = City_SOURCE)
+    df = filter_data(city)
+    upsert_city(df)
+    library = download_data(url = Libray_SOURCE)
+    df2 = filter_data(library)
+    upsert_library(df2)
 
 
 def main_loop(timeout=DOWNLOAD_PERIOD):
@@ -60,9 +61,9 @@ def main_loop(timeout=DOWNLOAD_PERIOD):
     def _worker():
 #         try:
           update_once()
-#         except Exception as e:
-#             logger.warning("main loop worker ignores exception and continues: {}".format(e))
-#         scheduler.enter(timeout, 1, _worker)    # schedule the next event
+        except Exception as e:
+            logger.warning("main loop worker ignores exception and continues: {}".format(e))
+        scheduler.enter(timeout, 1, _worker)    # schedule the next event
 
     scheduler.enter(0, 1, _worker)              # start the first event
     scheduler.run(blocking=True)
