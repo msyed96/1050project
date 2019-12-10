@@ -1,5 +1,5 @@
 """
-Boston City hall and Library power consumption.
+Boston City hall power consumption.
 """
 import time
 import sched
@@ -9,18 +9,17 @@ import requests
 from io import StringIO
 
 import utils
-from database import upsert_bpa
+from database import upsert_city
 
 
 City_SOURCE = 'https://data.boston.gov/dataset/1b894599-21ff-478f-937d-653954977951/resource/f123e65d-dc0e-4c83-9348-ed46fec498c0/download/tmpm6_yf0qo.csv'
-Libray_SOURCE = 'https://data.boston.gov/dataset/652762e9-2556-47cd-8e80-798546992a57/resource/87c759ee-63b9-4aec-a00b-bba1672a20ef/download/tmpx80zw3rn.csv'
 MAX_DOWNLOAD_ATTEMPT = 5
 DOWNLOAD_PERIOD = 14400         # second
 logger = logging.Logger(__name__)
 utils.setup_logger(logger, 'data.log')
 
 
-def download_data(url, retries=MAX_DOWNLOAD_ATTEMPT):
+def download_data(url=City_SOURCE, retries=MAX_DOWNLOAD_ATTEMPT):
     """Returns data text from `data_SOURCE` that includes datetime and total power usage
     Returns None if network failed
     """
@@ -47,13 +46,10 @@ def filter_data(text):
 
 
 def update_once():
-    city = download_data(url = City_SOURCE)
+    city = download_data()
     df = filter_data(city)
     upsert_city(df)
-    library = download_data(url = Libray_SOURCE)
-    df2 = filter_data(library)
-    upsert_library(df2)
-
+ 
 
 def main_loop(timeout=DOWNLOAD_PERIOD):
     scheduler = sched.scheduler(time.time, time.sleep)
