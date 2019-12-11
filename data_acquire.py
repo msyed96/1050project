@@ -14,7 +14,7 @@ from database import upsert_city
 
 City_SOURCE = 'https://data.boston.gov/dataset/1b894599-21ff-478f-937d-653954977951/resource/f123e65d-dc0e-4c83-9348-ed46fec498c0/download/tmpm6_yf0qo.csv'
 MAX_DOWNLOAD_ATTEMPT = 5
-DOWNLOAD_PERIOD = 14400         # second
+DOWNLOAD_PERIOD = 3000         # second
 logger = logging.Logger(__name__)
 utils.setup_logger(logger, 'data.log')
 
@@ -55,7 +55,7 @@ def main_loop(timeout=DOWNLOAD_PERIOD):
     scheduler = sched.scheduler(time.time, time.sleep)
 
     def _worker():
-#         try:
+        try:
           update_once()
         except Exception as e:
             logger.warning("main loop worker ignores exception and continues: {}".format(e))

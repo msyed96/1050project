@@ -23,7 +23,7 @@ import utils
 client = pymongo.MongoClient()
 logger = logging.Logger(__name__)
 utils.setup_logger(logger, 'db.log')
-RESULT_CACHE_EXPIRATION = 14400            # seconds
+RESULT_CACHE_EXPIRATION = 3000           # seconds
 
 
 def upsert_city(df):
