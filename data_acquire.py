@@ -59,10 +59,10 @@ def main_loop(timeout=DOWNLOAD_PERIOD):
           update_once()
         except Exception as e:
             logger.warning("main loop worker ignores exception and continues: {}".format(e))
-        scheduler.enter(timeout, 1, _worker)    # schedule the next event
+        scheduler.enter(timeout, 1, _worker, ())    # schedule the next event
 
-    scheduler.enter(0, 1, _worker)              # start the first event
-    scheduler.run(blocking=True)
+    scheduler.enter(0, 1, _worker, ())              # start the first event
+    scheduler.run()
 
 
 if __name__ == '__main__':

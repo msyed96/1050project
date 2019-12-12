@@ -6,3 +6,6 @@
 2019-12-09 02:09:43,103 [fetch_all_bpa] 0 documents read from the db
 2019-12-09 17:37:26,929 [fetch_all_bpa] 0 documents read from the db
 2019-12-09 17:37:30,203 [fetch_all_bpa] 0 documents read from the db
+2019-12-11 18:34:13,656 [upsert_city] rows=97898, update=97898, insert=0
+2019-12-11 19:30:31,086 [upsert_city] rows=97898, update=97898, insert=0
+2019-12-12 18:19:28,869 [upsert_city] rows=97898, update=48, insert=97850
