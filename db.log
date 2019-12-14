@@ -9,3 +9,30 @@
 2019-12-11 18:34:13,656 [upsert_city] rows=97898, update=97898, insert=0
 2019-12-11 19:30:31,086 [upsert_city] rows=97898, update=97898, insert=0
 2019-12-12 18:19:28,869 [upsert_city] rows=97898, update=48, insert=97850
+2019-12-12 19:52:37,084 [fetch_all_city] 64798 documents read from the db
+2019-12-12 19:52:54,672 [fetch_all_city] 65311 documents read from the db
+2019-12-12 20:42:16,057 [fetch_all_city] 0 documents read from the db
+2019-12-12 20:59:10,311 [fetch_all_city] 52604 documents read from the db
+2019-12-12 20:59:25,403 [fetch_all_city] 53042 documents read from the db
+2019-12-12 21:02:14,151 [fetch_all_city] 57831 documents read from the db
+2019-12-12 21:06:14,967 [fetch_all_city] 64106 documents read from the db
+2019-12-12 21:08:04,761 [fetch_all_city] 66818 documents read from the db
+2019-12-12 21:11:45,525 [fetch_all_city] 70437 documents read from the db
+2019-12-12 21:13:04,936 [fetch_all_city] 71495 documents read from the db
+2019-12-12 21:16:33,444 [fetch_all_city] 74443 documents read from the db
+2019-12-12 21:41:21,199 [upsert_city] rows=97898, update=48, insert=97850
+2019-12-12 21:42:38,767 [upsert_city] rows=97898, update=97898, insert=0
+2019-12-12 21:42:51,925 [upsert_city] rows=97898, update=97898, insert=0
+2019-12-12 21:49:01,665 [fetch_all_city] 8274 documents read from the db
+2019-12-12 21:52:24,494 [fetch_all_city] 28307 documents read from the db
+2019-12-12 21:55:04,246 [fetch_all_city] 37362 documents read from the db
+2019-12-12 22:00:59,785 [fetch_all_city] 52375 documents read from the db
+2019-12-12 22:02:40,430 [fetch_all_city] 55799 documents read from the db
+2019-12-12 22:05:07,255 [fetch_all_city] 60463 documents read from the db
+2019-12-12 22:28:19,391 [fetch_all_city] 93124 documents read from the db
+2019-12-12 22:28:23,088 [fetch_all_city] 93197 documents read from the db
+2019-12-12 22:28:27,855 [fetch_all_city] 93287 documents read from the db
+2019-12-12 22:29:57,988 [fetch_all_city] 95051 documents read from the db
+2019-12-12 22:30:15,369 [fetch_all_city] 95360 documents read from the db
+2019-12-12 22:32:25,877 [upsert_city] rows=97898, update=48, insert=97850
+2019-12-12 22:32:27,227 [fetch_all_city] 97850 documents read from the db
