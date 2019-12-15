@@ -9,6 +9,7 @@
 2019-12-11 18:34:13,656 [upsert_city] rows=97898, update=97898, insert=0
 2019-12-11 19:30:31,086 [upsert_city] rows=97898, update=97898, insert=0
 2019-12-12 18:19:28,869 [upsert_city] rows=97898, update=48, insert=97850
+<<<<<<< Updated upstream
 2019-12-12 19:52:37,084 [fetch_all_city] 64798 documents read from the db
 2019-12-12 19:52:54,672 [fetch_all_city] 65311 documents read from the db
 2019-12-12 20:42:16,057 [fetch_all_city] 0 documents read from the db
@@ -36,3 +37,62 @@
 2019-12-12 22:30:15,369 [fetch_all_city] 95360 documents read from the db
 2019-12-12 22:32:25,877 [upsert_city] rows=97898, update=48, insert=97850
 2019-12-12 22:32:27,227 [fetch_all_city] 97850 documents read from the db
+=======
+2019-12-12 19:50:40,715 [fetch_all_city] 71842 documents read from the db
+2019-12-12 20:20:54,819 [upsert_city] rows=97898, update=48, insert=97850
+2019-12-12 21:13:20,179 [fetch_all_city] 0 documents read from the db
+2019-12-12 21:52:50,639 [fetch_all_city] 84631 documents read from the db
+2019-12-12 21:57:20,043 [fetch_all_city] 90116 documents read from the db
+2019-12-12 22:04:06,326 [upsert_city] rows=97898, update=48, insert=97850
+2019-12-12 22:11:53,472 [fetch_all_city] 97850 documents read from the db
+2019-12-12 22:22:32,358 [fetch_all_city] 97850 documents read from the db
+2019-12-12 22:46:19,609 [upsert_city] rows=97898, update=97898, insert=0
+2019-12-14 16:06:21,703 [fetch_all_city] 0 documents read from the db
+2019-12-14 16:06:25,062 [fetch_all_city] 0 documents read from the db
+2019-12-14 16:13:33,122 [fetch_all_city] 32468 documents read from the db
+2019-12-14 16:20:52,047 [fetch_all_city] 47370 documents read from the db
+2019-12-14 16:26:15,457 [fetch_all_city] 54335 documents read from the db
+2019-12-14 16:33:40,734 [fetch_all_city] 64705 documents read from the db
+2019-12-14 17:03:59,717 [upsert_city] rows=97898, update=48, insert=97850
+2019-12-14 17:04:52,247 [upsert_city] rows=97898, update=97898, insert=0
+2019-12-14 17:50:39,142 [fetch_all_city] 0 documents read from the db
+2019-12-14 17:50:41,779 [fetch_all_city] 0 documents read from the db
+2019-12-14 17:54:57,067 [fetch_all_city] 27310 documents read from the db
+2019-12-14 17:58:12,418 [fetch_all_city] 38095 documents read from the db
+2019-12-14 18:06:18,568 [fetch_all_city] 56061 documents read from the db
+2019-12-14 18:15:06,564 [fetch_all_city] 69640 documents read from the db
+2019-12-14 18:22:05,444 [fetch_all_city] 78954 documents read from the db
+2019-12-14 18:27:51,174 [fetch_all_city] 86358 documents read from the db
+2019-12-14 18:32:43,609 [fetch_all_city] 91926 documents read from the db
+2019-12-14 18:37:41,558 [fetch_all_city] 97562 documents read from the db
+2019-12-14 18:37:56,392 [upsert_city] rows=97898, update=48, insert=97850
+2019-12-14 18:38:41,251 [fetch_all_city] 97850 documents read from the db
+2019-12-14 18:49:23,125 [fetch_all_city] 97850 documents read from the db
+2019-12-14 18:50:25,271 [fetch_all_city] 97850 documents read from the db
+2019-12-14 18:50:29,275 [fetch_all_city] 97850 documents read from the db
+2019-12-14 18:54:11,781 [fetch_all_city] 97850 documents read from the db
+2019-12-14 18:55:48,210 [fetch_all_city] 97850 documents read from the db
+2019-12-14 18:59:46,996 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:00:02,003 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:01:32,774 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:19:28,919 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:20:11,410 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:21:53,323 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:22:46,542 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:25:26,623 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:25:52,410 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:29:22,900 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:31:11,886 [fetch_all_city] 97850 documents read from the db
+2019-12-14 19:31:37,076 [fetch_all_city] 97850 documents read from the db
+2019-12-15 19:07:39,013 [fetch_all_city] 0 documents read from the db
+2019-12-15 19:07:41,636 [fetch_all_city] 0 documents read from the db
+2019-12-15 19:08:15,526 [fetch_all_city] 3746 documents read from the db
+2019-12-15 19:11:24,627 [fetch_all_city] 24767 documents read from the db
+2019-12-15 19:12:40,929 [fetch_all_city] 28369 documents read from the db
+2019-12-15 19:14:46,196 [fetch_all_city] 34085 documents read from the db
+2019-12-15 19:28:40,795 [fetch_all_city] 62408 documents read from the db
+2019-12-15 19:31:08,316 [fetch_all_city] 66340 documents read from the db
+2019-12-15 19:33:03,873 [fetch_all_city] 68826 documents read from the db
+2019-12-15 19:34:28,637 [fetch_all_city] 70596 documents read from the db
+2019-12-15 19:38:13,644 [fetch_all_city] 75052 documents read from the db
+>>>>>>> Stashed changes
