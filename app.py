@@ -58,11 +58,25 @@ def description(): #about page needs to be seperate page on website but this is 
         - Maheen Syed
         - William Ward
 
-        ### Executive Summary: Fill in
+        ### Executive Summary: 
+        For this project, we aimed to provide insights with regards to power consumption with relation to temperature data. 
+        This can be achieved by using our interactive tool called the Power Predictor! Scroll down to learn more.
 
         ### References to related work:
-        - “Energy Consumption Assessment City of Boston 50 Buildings Report In 2012.”  City of Boston.
+        - “Energy Consumption Assessment City of Boston 50 Buildings Report In 2012.”  City of Boston. 
+        https://www.cityofboston.gov/images_documents/EEMS%20Energy%20Consumption%20Assessment%20Report%20Final_tcm3-33503.pdf. 
+        The city of Boston published an assessment of energy consumption at 50 different buildings, including city hall. 
+        These assessments are provided in this journal. 
         - “Boston Energy Use.” ACEEE, American Council for an Energy Efficient Economy, https://database.aceee.org/city/boston-ma. 
+        The American Council for an Energy Efficient Economy ranks cities based on their energy use policies; Boston ranks number 1. 
+        - “Building Energy Reporting and Disclosure Ordinance.” Boston.gov, 17 July 2016,
+         https://www.boston.gov/environment-and-energy/building-energy-reporting-and-disclosure-ordinance. 
+         The energy use data is published as part of a city ordinance. Information about the program and the data is available here. 
+        - Quantifying Changes in Building Electricity Use, With Application to Demand Response - IEEE Journals & Magazine, 
+        https://ieeexplore.ieee.org/abstract/document/5772947. A guide for building managers for dealing with electricity load data
+        - Yildiz, B., et al. “A Review and Analysis of Regression and Machine Learning Models on Commercial Building Electricity Load Forecasting.” 
+        Renewable and Sustainable Energy Reviews, vol. 73, 2017, pp. 1104–1122. 
+        https://www.sciencedirect.com/science/article/pii/S1364032117302265 Machine learning in electricity forecasting.
 
         
         ### Summary of performance with respect to the baseline model(s): Fill in 

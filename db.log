@@ -96,3 +96,8 @@
 2019-12-15 19:34:28,637 [fetch_all_city] 70596 documents read from the db
 2019-12-15 19:38:13,644 [fetch_all_city] 75052 documents read from the db
 >>>>>>> Stashed changes
+2019-12-15 19:49:54,108 [fetch_all_city] 88791 documents read from the db
+2019-12-15 19:51:38,485 [fetch_all_city] 90663 documents read from the db
+2019-12-15 19:51:42,890 [fetch_all_city] 90743 documents read from the db
+2019-12-15 19:58:20,726 [fetch_all_city] 97762 documents read from the db
+2019-12-15 19:59:19,383 [fetch_all_city] 97850 documents read from the db
