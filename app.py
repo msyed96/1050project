@@ -17,7 +17,7 @@ pyo.init_notebook_mode()
 
 
 
-from database import fetch_all_city_as_df #changed the bpa thing
+from database import fetch_all_city_as_df 
 
 # Definitions of constants. This projects uses extra CSS stylesheet at `./assets/style.css`
 COLORS = ['rgb(67,67,67)', 'rgb(115,115,115)', 'rgb(49,130,189)', 'rgb(189,189,189)']
@@ -35,11 +35,11 @@ def page_header():
     Returns the page header as a dash `html.Div`
     """
     return html.Div(id='header', children=[
-        html.Div([html.H3('Visualization for DATA1050 final project using datashader and Plotly')],
+        html.Div([html.H3('Boston Power Rangers: DATA1050 Final Project')],
                  className="ten columns"),
-        html.A([html.Img(id='logo', src=app.get_asset_url('github.png'),
+        html.A([html.Img(id='logo', src=app.get_asset_url('power-rangers.png'),
                          style={'height': '35px', 'paddingTop': '7%'}),
-                html.Span('Blownhither', style={'fontSize': '2rem', 'height': '35`px', 'bottom': 0,
+                html.Span('BPR', style={'fontSize': '2rem', 'height': '35`px', 'bottom': 0,
                                                 'paddingLeft': '4px', 'color': '#a3a7b0',
                                                 'textDecoration': 'none'})],
                className="two columns row",
@@ -69,37 +69,14 @@ def description(): #about page needs to be seperate page on website but this is 
         - Maheen Syed
         - William Ward
 
-        ### References to related work:
-        - “Energy Consumption Assessment City of Boston 50 Buildings Report In 2012.”  City of Boston. 
-        https://www.cityofboston.gov/images_documents/EEMS%20Energy%20Consumption%20Assessment%20Report%20Final_tcm3-33503.pdf. 
-        The city of Boston published an assessment of energy consumption at 50 different buildings, including city hall. 
-        These assessments are provided in this journal. 
-        - “Boston Energy Use.” ACEEE, American Council for an Energy Efficient Economy, https://database.aceee.org/city/boston-ma. 
-        The American Council for an Energy Efficient Economy ranks cities based on their energy use policies; Boston ranks number 1. 
-        - “Building Energy Reporting and Disclosure Ordinance.” Boston.gov, 17 July 2016,
-         https://www.boston.gov/environment-and-energy/building-energy-reporting-and-disclosure-ordinance. 
-         The energy use data is published as part of a city ordinance. Information about the program and the data is available here. 
-        - Quantifying Changes in Building Electricity Use, With Application to Demand Response - IEEE Journals & Magazine, 
-        https://ieeexplore.ieee.org/abstract/document/5772947. A guide for building managers for dealing with electricity load data
-        - Yildiz, B., et al. “A Review and Analysis of Regression and Machine Learning Models on Commercial Building Electricity Load Forecasting.” 
-        Renewable and Sustainable Energy Reviews, vol. 73, 2017, pp. 1104–1122. 
-        https://www.sciencedirect.com/science/article/pii/S1364032117302265 Machine learning in electricity forecasting.
+        ### Summary of performance with respect to the baseline model(s): 
+        Our model provides predictions for data that is outside of the range. 
 
-        
-        ### Summary of performance with respect to the baseline model(s): Fill in 
-
-        ### Possible Future Steps:
-        One possible extension of this project is to incorporate other buildings into the analysis. 
-        Boston also publishes data about electricity use at Central Library in Copley Square. 
-        This data is posted in five minute increments, even more frequently than the City Hall data, and is updated six times a day. 
-        While City Hall is primarily a place for civil servants to work during business hours, the library is primarily intended as a public gathering place. 
-        How does electricity usage differ between these two spaces? Are they affected differently by holidays and weekends?
-        Are they most active at different times of day? 
-
+    
         ### Data Source
-        Power Predictor! uses data from the city of Boston's open data hub. Read more about it [here](https://data.boston.gov/dataset/city-hall-electricity-usage). 
-        **updates every 4 hours** with data from every 15 minutes. 
-        The weather data is from the national center for environmental information [NCEI](https://www.ncei.noaa.gov/)
+        Power Predictor! uses data from two sources, from the city of Boston's open data hub (Read more about it [here](https://data.boston.gov/dataset/city-hall-electricity-usage) )
+        and weather data from the national center for environmental information [NCEI](https://www.ncei.noaa.gov/). 
+        This Boston city dataset **updates every 4 hours** with data from every 15 minutes. 
         
         ''', className='eleven columns', style={'paddingLeft': '5%'})], className="row")
 
@@ -136,23 +113,6 @@ def static_stacked_trend_graph(stack=False):
     fig.update_yaxes(title_text="KW", secondary_y=False)
     fig.update_yaxes(title_text="Temp", secondary_y=True)
     return fig
-    # fig = go.Figure()
-    # for i, s in enumerate(sources):
-    #     fig.add_trace(go.Scatter(x=x, y=df[s], mode='lines', name=s,
-    #                              line={'width': 2, 'color': COLORS[i]},
-    #                              stackgroup='stack' if stack else None))
-    # fig.add_trace(go.Scatter(x=x, y=df['Load'], mode='lines', name='Load',
-    #                          line={'width': 2, 'color': 'orange'}))
-    # title = 'Energy Production & Consumption under BPA Balancing Authority'
-    # if stack:
-    #     title += ' [Stacked]'
-    # fig.update_layout(template='plotly_dark',
-    #                   title=title,
-    #                   plot_bgcolor='#23272c',
-    #                   paper_bgcolor='#23272c',
-    #                   yaxis_title='MW',
-    #                   xaxis_title='Date/Time')
-    # return fig
 
 
 def what_if_description(): #DESCRIBE THE ENHANCEMENT STUFF: 
@@ -162,7 +122,7 @@ def what_if_description(): #DESCRIBE THE ENHANCEMENT STUFF:
     return html.Div(children=[
         dcc.Markdown('''
         ## Power Predictor!
-        The Power Prediction tool is a great way to visualize power consumption on temperature. 
+        The Power Prediction tool is a great way to visualize power consumption based on temperature. 
         For example,  a business interested in allocating resources would gain a lot of insight by observing power 
         consumption as it highly impacts budgeting models. Using our Power Predictor tool to look at the varying power
         consumption levels for different months and corresponding temperatures, can make this process much smoother for businesses!
@@ -216,14 +176,14 @@ def architecture_summary():
     """
     return html.Div(children=[
         dcc.Markdown('''
-            # Project Architecture
-           The data for this website is stored in a MongoDB database. Queries are performed via function call. 
-           The website is hosted through a dash app, and interactive visualizations were prepared using plot.ly. 
-           The interactive aspects of the page are redirected through app.py for updates to the page. 
 
+        # Additional Project Details:
 
+        ### Project Architecture
+        This website was built using Python. The data was acquired using the City of Boston’s website  and stored in a MongoDB database. 
+        The website is hosted through a dash app, and interactive visualizations were prepared using plot.ly. 
+        The interactive aspects of the page are redirected through app.py for updates to the page. 
         ''', className='row eleven columns', style={'paddingLeft': '5%'}),
-
         html.Div(children=[
             html.Img(src="https://docs.google.com/drawings/d/e/2PACX-1vQNerIIsLZU2zMdRhIl3ZZkDMIt7jhE_fjZ6ZxhnJ9bKe1emPcjI92lT5L7aZRYVhJgPZ7EURN0AqRh/pub?w=670&amp;h=457",
                      className='row'),
@@ -231,7 +191,51 @@ def architecture_summary():
 
         dcc.Markdown('''
         
-        ''')
+        
+
+        ### Data Acquisition, Caching, ETL Processing & Database Design
+        The data is accessed from the website for the Boston City Hall data using the Python Requests library.
+        The weather data is static data that is downloaded from the National Centers for Environmental Information website.  
+        Furthermore, the Boston City Hall  data is cached  every four hours, after which the data is redownloaded.
+
+        The ETL processing steps involved  accessing  the website,  converting the data to a pandas dataframe, and then setting up a Mongo DB connection to establish a database.  
+        For weather data, a csv file containing the data was loaded and the data was  converted to a pandas dataframe. After this, we extracted the date/time and the average temperature values for the data. 
+        
+        Furthermore, the database used is described as follows:
+
+        The electricity data consists of two columns: date/time and KiloWatts. 
+        This data is updated incrementally. Thee weather data consists of two  columns: data/time and average temperature values in Celcius. 
+
+        ### Possible Future Steps:
+        One possible extension of this project is to incorporate other buildings into the analysis. 
+        Boston also publishes data about electricity use at Central Library in Copley Square. 
+        This data is posted in five minute increments, even more frequently than the City Hall data, and is updated six times a day. 
+        While City Hall is primarily a place for civil servants to work during business hours, the library is primarily intended as a public gathering place. 
+        How does electricity usage differ between these two spaces? Are they affected differently by holidays and weekends?
+        Are they most active at different times of day? 
+   
+        - Access ETL_EDA notebook [here](https://github.com/msyed96/1050project/blob/master/ETL_EDA.ipynb)
+        - Access Visualization notebook [here](https://github.com/msyed96/1050project/blob/master/Visualization.ipynb)
+        - Access Enhancement notebook [here](https://github.com/msyed96/1050project/blob/master/Enhancement.ipynb)
+
+        ### References to related work:
+        - “Energy Consumption Assessment City of Boston 50 Buildings Report In 2012.”  City of Boston. 
+        https://www.cityofboston.gov/images_documents/EEMS%20Energy%20Consumption%20Assessment%20Report%20Final_tcm3-33503.pdf. 
+        The city of Boston published an assessment of energy consumption at 50 different buildings, including city hall. 
+        These assessments are provided in this journal. 
+        - “Boston Energy Use.” ACEEE, American Council for an Energy Efficient Economy, https://database.aceee.org/city/boston-ma. 
+        The American Council for an Energy Efficient Economy ranks cities based on their energy use policies; Boston ranks number 1. 
+        - “Building Energy Reporting and Disclosure Ordinance.” Boston.gov, 17 July 2016,
+         https://www.boston.gov/environment-and-energy/building-energy-reporting-and-disclosure-ordinance. 
+         The energy use data is published as part of a city ordinance. Information about the program and the data is available here. 
+        - Quantifying Changes in Building Electricity Use, With Application to Demand Response - IEEE Journals & Magazine, 
+        https://ieeexplore.ieee.org/abstract/document/5772947. A guide for building managers for dealing with electricity load data
+        - Yildiz, B., et al. “A Review and Analysis of Regression and Machine Learning Models on Commercial Building Electricity Load Forecasting.” 
+        Renewable and Sustainable Energy Reviews, vol. 73, 2017, pp. 1104–1122. 
+        https://www.sciencedirect.com/science/article/pii/S1364032117302265 Machine learning in electricity forecasting.
+
+        ''', className='row eleven columns', style={'paddingLeft': '5%'}),
+
     ], className='row')
 
 # Sequentially add page components to the app's layout
@@ -244,7 +248,6 @@ app.layout = html.Div([
     what_if_description(),
     what_if_tool(),
     architecture_summary(),
-    # dcc.Graph(id='what-if-figure', figure=what_if_handler(months, scaler)),
 ], className='row', id='content')
 
 
@@ -273,22 +276,6 @@ _what_if_data_cache = None
     dash.dependencies.Output('what-if-figure', 'figure'),
     [dash.dependencies.Input('months-slider', 'value'),
      dash.dependencies.Input('temp-scale-slider', 'value')])
-# def what_if_handler(wind, hydro):
-#     """Changes the display graph of supply-demand"""
-#     df = fetch_all_bpa_as_df(allow_cached=True)
-#     x = df['Datetime']
-#     supply = df['Wind'] * wind + df['Hydro'] * hydro + df['Fossil/Biomass'] + df['Nuclear']
-#     load = df['Load']
-
-#     fig = go.Figure()
-#     fig.add_trace(go.Scatter(x=x, y=supply, mode='none', name='supply', line={'width': 2, 'color': 'pink'},
-#                   fill='tozeroy'))
-#     fig.add_trace(go.Scatter(x=x, y=load, mode='none', name='demand', line={'width': 2, 'color': 'orange'},
-#                   fill='tonexty'))
-#     fig.update_layout(template='plotly_dark', title='Supply/Demand after Power Scaling',
-#                       plot_bgcolor='#23272c', paper_bgcolor='#23272c', yaxis_title='MW',
-#                       xaxis_title='Date/Time')
-#     return fig
 
 def what_if_handler(months, scaler):
     df2 = pds.read_csv('data/Date_Temp_Data.csv')
@@ -341,7 +328,8 @@ def what_if_handler(months, scaler):
                       title=title,
                       plot_bgcolor='#23272c',
                       paper_bgcolor='#23272c',
-                      xaxis_title='Temperature')
+                      xaxis_title='Temperature (Celcius)',
+                      yaxis_title='Power (KW)')
     # Plot and embed in ipython notebook!
     return fig
 
