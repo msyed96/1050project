@@ -6,6 +6,16 @@ import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import pandas as pds
+import plotly.graph_objects as go
+import plotly.offline as pyo
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+# import matplotlib.pyplot as plt
+import plotly.express as px
+import numpy as np
+pyo.init_notebook_mode()
+
+
 
 from database import fetch_all_city_as_df #changed the bpa thing
 
@@ -49,18 +59,15 @@ def description(): #about page needs to be seperate page on website but this is 
         the weather? This project graphs electricity-use data which is posted in fifteen minute increments to reveal 
         trends in how electricity is used in this central municipal building. 
         The visualizations on this page transform data originally published in tabular form into a 
-        graphical representation, linked to a separate dataset on daily weather. Use the interactive features on the website to 
+        graphical representation, linked to a separate dataset on daily weather. Using our interactive tool called the Power Predictor! we can 
         explore seasonal trends and see how electricity-use varies. 
+        Scroll down to learn more.
         
         ### Boston Power Rangers Team Members:
         - Evon Okidi
         - Marie Schenk
         - Maheen Syed
         - William Ward
-
-        ### Executive Summary: 
-        For this project, we aimed to provide insights with regards to power consumption with relation to temperature data. 
-        This can be achieved by using our interactive tool called the Power Predictor! Scroll down to learn more.
 
         ### References to related work:
         - “Energy Consumption Assessment City of Boston 50 Buildings Report In 2012.”  City of Boston. 
@@ -90,10 +97,10 @@ def description(): #about page needs to be seperate page on website but this is 
         Are they most active at different times of day? 
 
         ### Data Source
-        #Energy Planner# utilizes near-real-time power consumption & weather data from [BPA 
-        Balancing Authority](https://www.bpa.gov/news/AboutUs/Pages/default.aspx).
-        The [data source](https://transmission.bpa.gov/business/operations/Wind/baltwg.aspx) 
-        **updates every 5 minutes**. 
+        Power Predictor! uses data from the city of Boston's open data hub. Read more about it [here](https://data.boston.gov/dataset/city-hall-electricity-usage). 
+        **updates every 4 hours** with data from every 15 minutes. 
+        The weather data is from the national center for environmental information [NCEI](https://www.ncei.noaa.gov/)
+        
         ''', className='eleven columns', style={'paddingLeft': '5%'})], className="row")
 
 
@@ -154,12 +161,12 @@ def what_if_description(): #DESCRIBE THE ENHANCEMENT STUFF:
     """
     return html.Div(children=[
         dcc.Markdown('''
-        ## Power Predictor
+        ## Power Predictor!
         The Power Prediction tool is a great way to visualize power consumption on temperature. 
         For example,  a business interested in allocating resources would gain a lot of insight by observing power 
         consumption as it highly impacts budgeting models. Using our Power Predictor tool to look at the varying power
         consumption levels for different months and corresponding temperatures, can make this process much smoother for businesses!
-        The steps to construct the tool, involved training a Support Vector Machine classifier  to create our predictive model. 
+        The steps to construct the tool, involved using polynomial regression with 4 degrees of freedom  to create our predictive model. 
         This model  allows us to predict power consumption based on varying the temperature within each specific month (using the sliders provided). 
         As a result,  the projected power consumption for the specified month will be visualized. 
         You can move around the sliders to and try this out  for yourself! 
@@ -168,7 +175,7 @@ def what_if_description(): #DESCRIBE THE ENHANCEMENT STUFF:
     ], className="row")
 
 
-def what_if_tool(): #PUT IN THE ACTUAL ENHANCEMENT CODE:
+def what_if_tool(): 
     """
     Returns the What-If tool as a dash `html.Div`. The view is a 8:3 division between
     demand-supply plot and rescale sliders.
@@ -233,11 +240,11 @@ app.layout = html.Div([
     page_header(),
     html.Hr(),
     description(),
-    # dcc.Graph(id='trend-graph', figure=static_stacked_trend_graph(stack=False)),
     dcc.Graph(id='stacked-trend-graph', figure=static_stacked_trend_graph(stack=False)),
     what_if_description(),
     what_if_tool(),
     architecture_summary(),
+    # dcc.Graph(id='what-if-figure', figure=what_if_handler(months, scaler)),
 ], className='row', id='content')
 
 
@@ -284,39 +291,59 @@ _what_if_data_cache = None
 #     return fig
 
 def what_if_handler(months, scaler):
-        # global df, df2
-    df = fetch_all_city_as_df(allow_cached=True)
     df2 = pds.read_csv('data/Date_Temp_Data.csv')
+    df = fetch_all_city_as_df()
     dates= pds.to_datetime(df['DateTime_Measured'])
-    ever2 = pds.concat([dates,df['Total_Demand_KW']],axis = 1)
+    ever2 = pds.concat([dates,df['Total_Demand_KW']],axis = 1,sort = False)
     #monthly_usage = ever2[(ever2['DateTime_Measured'].dt.month ==1) & (ever2['DateTime_Measured'].dt.year == 2018)]
     
     trimonth = pds.DataFrame()
     for x in [2017,2018,2019]:
         monthly_usage = ever2[(ever2['DateTime_Measured'].dt.month ==months) & (ever2['DateTime_Measured'].dt.year == x)]
         temp=monthly_usage.resample('D', on='DateTime_Measured').mean()
-        trimonth=pds.concat([trimonth,temp])
+        trimonth=pds.concat([trimonth,temp],sort = False)
     dates= pds.to_datetime(df2['Date/Time'])
-    ever = pds.concat([dates,df2['TAVG']],axis = 1)
-    monthly_temp = ever[(ever['Date/Time'].dt.month ==months )]
-    combined_df = pds.concat([monthly_temp,trimonth],axis = 1)
+    ever = pds.concat([dates,df2['TAVG']],axis = 1,sort = False)
+    monthly_temp = ever[(ever['Date/Time'].dt.month ==8 )]
+    monthly_temp.reset_index(drop = True, inplace = True)
+    trimonth.reset_index(drop= True, inplace = True)
+    combined_df = pds.concat([monthly_temp['TAVG'],trimonth['Total_Demand_KW']],axis = 1,sort = False)
+#    print(combined_df.head())
     combined_df.dropna(inplace = True)
-    X = monthly_temp['TAVG'].values.reshape(-1, 1)
-    y = trimonth['Total_Demand_KW'].values.reshape(-1, 1)
-    print(X.shape,y.shape)
+    X = combined_df['TAVG'].values.reshape(-1, 1)
+    y = combined_df['Total_Demand_KW'].values.reshape(-1, 1)
+#    print(X.shape,y.shape)
     poly = PolynomialFeatures(degree =4) 
     X_poly = poly.fit_transform(X) 
     poly.fit(X_poly, y) 
     lin2 = LinearRegression() 
     lin2.fit(X_poly, y)
     y_pred = lin2.predict(poly.fit_transform(X))
-    plt.scatter(X, y_pred, color = 'red')
-    plt.scatter(X*scaler, lin2.predict(poly.fit_transform(scaler*X)), color = 'blue') 
-    plt.title('Polynomial Regression') 
-    plt.xlabel('Temperature') 
-    plt.ylabel('Power') 
-    plt.show()
-
+    # plt.scatter(X, y_pred, color = 'red')
+    # plt.scatter(X*scaler, lin2.predict(poly.fit_transform(scaler*X)), color = 'blue') 
+    # plt.title('Polynomial Regression') 
+    # plt.xlabel('Temperature') 
+    # plt.ylabel('Power') 
+#    return plt
+# Create a trace
+#     print(np.array(X),np.array(X).flatten(),X)
+#     trace = go.Scatter(
+#         x = np.array(X).flatten(),
+#         y = np.array(y_pred).flatten(),
+#         mode = 'markers'
+#     )
+    y_pred_scaled = lin2.predict(poly.fit_transform(scaler*X))
+    fig = go.Figure()
+    title = 'Power consumption Boston with daily temperature'
+    fig.add_trace(go.Scatter(x=np.array(X).flatten(), y=np.array(y_pred).flatten(), mode='markers', name='Base Temp'))
+    fig.add_trace(go.Scatter(x=np.array(X*scaler).flatten(), y=np.array(y_pred_scaled).flatten(), mode='markers', name='Scaled Temp'))
+    fig.update_layout(template='plotly_dark',
+                      title=title,
+                      plot_bgcolor='#23272c',
+                      paper_bgcolor='#23272c',
+                      xaxis_title='Temperature')
+    # Plot and embed in ipython notebook!
+    return fig
 
 
 if __name__ == '__main__':
