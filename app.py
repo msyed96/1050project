@@ -37,7 +37,7 @@ def page_header():
     return html.Div(id='header', children=[
         html.Div([html.H3('Boston Power Rangers: DATA1050 Final Project')],
                  className="ten columns"),
-        html.A([html.Img(id='logo', src=app.get_asset_url('power-rangers.png'),
+        html.A([html.Img(id='logo', src=app.get_asset_url('Octocat.png'),
                          style={'height': '35px', 'paddingTop': '7%'}),
                 html.Span('BPR', style={'fontSize': '2rem', 'height': '35`px', 'bottom': 0,
                                                 'paddingLeft': '4px', 'color': '#a3a7b0',

@@ -1,6 +1,5 @@
-# Energy Planner
-> DATA1050 Example Project Fall 19
+# Power Predictor!
+> Boston Power Rangers: DATA1050 Final Project 
 
 
-https://docs.google.com/document/d/1uwpXgpEZpacViosYREnze5MGQFuVhMaRtYixxmIKXBU/edit#
-
+https://drive.google.com/open?id=1OeRGYter91YUSab31oKh9z9Gxvy7B06d
