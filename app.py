@@ -146,8 +146,8 @@ def what_if_tool():
         html.Div(children=[
             html.H5("Rescale Montly Temp", style={'marginTop': '2rem'}),
             html.Div(children=[
-                dcc.Slider(id='temp-scale-slider', min=0.8, max=1.2, step=0.1, value=1.05, className='row',
-                           marks={x: str(x) for x in np.arange(0.8, 1.21, 0.1)})
+                dcc.Slider(id='temp-scale-slider', min=0.9, max=1.1, step=0.025, value=1.05, className='row',
+                           marks={x: str(x) for x in np.arange(0.9, 1.1, 0.1)})
             ], style={'marginTop': '5rem'}),
 
             html.Div(id='temp-scale-text', style={'marginTop': '1rem'}),
@@ -201,10 +201,6 @@ def architecture_summary():
         The ETL processing steps involved  accessing  the website,  converting the data to a pandas dataframe, and then setting up a Mongo DB connection to establish a database.  
         For weather data, a csv file containing the data was loaded and the data was  converted to a pandas dataframe. After this, we extracted the date/time and the average temperature values for the data. 
         
-        Furthermore, the database used is described as follows:
-
-        The electricity data consists of two columns: date/time and KiloWatts. 
-        This data is updated incrementally. Thee weather data consists of two  columns: data/time and average temperature values in Celcius. 
 
         ### Possible Future Steps:
         One possible extension of this project is to incorporate other buildings into the analysis. 
@@ -258,7 +254,7 @@ app.layout = html.Div([
     [dash.dependencies.Input('temp-scale-slider', 'value')])
 def update_temp_scale_text(value):
     """Changes the display text of the temp slider"""
-    return "Temperature Scale {:.2f}x".format(value)
+    return "Temperature Scale: {:.2f}x".format(value)
 
 
 @app.callback(
@@ -266,7 +262,7 @@ def update_temp_scale_text(value):
     [dash.dependencies.Input('months-slider', 'value')])
 def update_months_text(value):
     """Changes the display text of the months slider"""
-    return "Month Requested {:.2f}x".format(value)
+    return "Month Requested: {:}".format(value)
 
 
 _what_if_data_cache = None
